@@ -1,0 +1,20 @@
+---
+# tasks file for jenkins
+- name: Check java version
+  shell: java -version 2>&1 | awk '/version/{print $NF}'
+  register: java_version
+
+- name: Add jenkins yum repository
+  yum_repository:
+    name: jenkins
+    description: Jenkins YUM repo
+    baseurl: https://pkg.jenkins.io/redhat-stable/
+    state: present
+- name: Install jenkins
+  yum:
+    name: jenkins
+    state: present
+- name: Start jenkins
+  service:
+    name: jenkins
+    state: started

@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  become: yes
+#  tasks:
+#  - include_role:
+#      name: jenkins
+  roles:
+    - java-install
+    - jenkins
