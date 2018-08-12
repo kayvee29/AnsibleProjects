@@ -1,0 +1,25 @@
+---
+# tasks file for minikube
+- name: copying kubernetes.repo
+  copy:
+    src: files/kubernetes.repo
+    dest: /etc/yum.repos.d/kubernetes.repo
+    owner: root
+
+- name: Installing kubectl
+  yum:
+    name: kubectl
+    state: present
+
+- name: Downloading minikube
+  get_url:
+    url: https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-darwin-amd64
+    dest: /usr/local/bin/minikube
+    mode: 755
+
+- name: Creating local cluster using minikube start
+  command: /usr/local/bin/minikube start
+  register: minikube_start_log
+
+- debug:
+    var: minikube_start_log
