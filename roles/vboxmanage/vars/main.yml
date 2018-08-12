@@ -1,2 +1,3 @@
 ---
 # vars file for vboxmanage
+virtualbox_version: VirtualBox-5.1
