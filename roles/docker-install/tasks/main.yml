@@ -1,0 +1,47 @@
+---
+# tasks file for docker-install
+- name: Uninstalling old versions of docker
+  yum:
+    name: "{{ packages }}"
+    state: absent
+  vars:
+    packages:
+    - docker-client
+    - docker-client-latest
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-logrotate
+    - docker-selinux
+    - docker-engine-selinux
+    - docker-engine
+
+- name: Installing pre-requisites
+  yum:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+
+- name: Add docker yum repository
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Installing Docker
+  yum:
+    name: docker-ce
+    state: present
+
+- name: Starting docker service
+  service:
+    name: docker
+    state: started
+
+- name: Enabling docker service
+  service:
+    name: docker
+    enabled: yes
