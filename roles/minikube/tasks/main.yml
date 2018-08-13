@@ -11,6 +11,13 @@
     name: kubectl
     state: present
 
+- name: Download docker-machine-driver-hyperkit
+  get_url:
+    url: https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit
+    dest: /usr/local/bin/docker-machine-driver-hyperkit
+    mode: 0755
+    owner: root
+
 - name: Downloading minikube
   get_url:
     url: https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-darwin-amd64
