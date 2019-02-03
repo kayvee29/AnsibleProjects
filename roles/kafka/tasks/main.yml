@@ -1,8 +1,0 @@
----
-# tasks file for kafka
-- name: Unarchive kafka binary from external source
-  unarchive:
-    src: http://www-us.apache.org/dist/kafka/0.11.0.3/kafka_2.11-0.11.0.3.tgz
-    dest: /usr/local/bin/
-    remote_src: yes
-    mode: 755

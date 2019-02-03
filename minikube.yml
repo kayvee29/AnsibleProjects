@@ -1,8 +1,0 @@
----
-- hosts: localhost
-  become: yes
-  tasks:
-  roles:
-      - vboxmanage
-      - docker-install
-      - minikube
